@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ConsultaCliente implements WindowListener
+public class ConsultaEmpleado implements WindowListener
 {
 	/* Elementos */
 	
 	// Frame
-	Frame ventana = new Frame("Consulta Clientes");
+	Frame ventana = new Frame("Consulta Empleados");
 	// TextArea
-	TextArea listadoClientes = new TextArea(4, 30);
+	TextArea listadoEmpleados = new TextArea(4, 30);
 	// Base de datos
 	BaseDatos bd = new BaseDatos();
 	String sentencia = "";
@@ -25,13 +25,13 @@ public class ConsultaCliente implements WindowListener
 	Statement statement = null;
 	ResultSet rs = null;
 
-	public ConsultaCliente()
+	public ConsultaEmpleado()
 	{
 		ventana.setLayout(new FlowLayout());
 		// Conectar
 		connection = bd.conectar();
-		// Seleccionar todos los clientes
-		sentencia = "SELECT * FROM clientes";
+		// Seleccionar todos los empleados
+		sentencia = "SELECT * FROM empleados";
 		// La información está en ResultSet
 		// Recorrer el RS y por cada registro,
 		// meter una línea en el TextArea
@@ -42,32 +42,33 @@ public class ConsultaCliente implements WindowListener
 			// Crear un objeto ResultSet para guardar lo obtenido
 			// y ejecutar la sentencia SQL
 			rs = statement.executeQuery(sentencia);
-			listadoClientes.selectAll();
-			listadoClientes.setText("");
-			listadoClientes.append("Nº\tNombre\tApellidos\tDNI\n");
-			// Mientras encuentre clientes
+			listadoEmpleados.selectAll();
+			listadoEmpleados.setText("");
+			listadoEmpleados.append("Nº\tNombre\tApellidos\tDNI\n");
+			// Mientras encuentre empleados
 			while (rs.next())
 			{
-				// Introduce el cliente en el listado
-				listadoClientes.append(rs.getInt("idCliente") + "\t" + rs.getString("nombreCliente") + "\t"
-						+ rs.getString("apellidosCliente") + "\t" + rs.getString("dniCliente") + "\n");
+				// Introduce el empleado en el listado
+				listadoEmpleados.append(rs.getInt("idEmpleados") + "\t" + rs.getString("nombreEmpleados") + "\t"
+						+ rs.getString("apellidosEmpleado") + "\t" + rs.getString("dniEmpleado") + "\n");
 			}
 		} catch (SQLException sqle)
 		{
 
 		} finally
 		{
+			listadoEmpleados.setEditable(false);
+			ventana.add(listadoEmpleados);
 
+			ventana.setSize(300, 140);
+			ventana.setResizable(false);
+			ventana.setLocationRelativeTo(null);
+			ventana.addWindowListener(this);
+			ventana.setVisible(true);
 		}
-		listadoClientes.setEditable(false);
-		ventana.add(listadoClientes);
 
-		ventana.setSize(300, 140);
-		ventana.setResizable(false);
-		ventana.setLocationRelativeTo(null);
-		ventana.addWindowListener(this);
-		ventana.setVisible(true);
 	}
+
 
 
 	@Override

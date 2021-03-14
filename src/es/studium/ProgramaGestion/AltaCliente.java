@@ -129,11 +129,12 @@ public class AltaCliente implements WindowListener, ActionListener
 				dlgConfirmarAltaCliente.add(lblMensajeAltaCliente);
 				dlgConfirmarAltaCliente.setVisible(true);
 			}
-
+			// Vaciar los TextFields
 			for (int i = 0; i < camposTxt.length; i++)
 			{
 				camposTxt[i].setText("");
 			}
+		// Si hay error, se vacian los TextFields
 		} else
 		{
 			for (int i = 0; i < camposTxt.length; i++)

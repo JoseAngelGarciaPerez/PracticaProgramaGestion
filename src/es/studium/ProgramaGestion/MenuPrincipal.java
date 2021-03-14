@@ -127,6 +127,7 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
+		// Clientes
 		if(ae.getSource().equals(mniAltaCliente)) 
 		{
 			new AltaCliente();
@@ -142,6 +143,24 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		else if(ae.getSource().equals(mniModificacionCliente))
 		{
 			new ModificarCliente();
+		}
+		
+		// Empleados
+		else if(ae.getSource().equals(mniAltaEmpleado)) 
+		{
+			new AltaEmpleados();
+		}
+		else if(ae.getSource().equals(mniBajaEmpleado)) 
+		{
+			new BajaEmpleado();
+		}
+		else if(ae.getSource().equals(mniConsultaEmpleado)) 
+		{
+			new ConsultaEmpleado();
+		}
+		else if(ae.getSource().equals(mniModificacionEmpleado)) 
+		{
+			new ModificarEmpleado();
 		}
 		
 	}
