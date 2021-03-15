@@ -17,7 +17,7 @@ public class ConsultaEmpleado implements WindowListener
 	// Frame
 	Frame ventana = new Frame("Consulta Empleados");
 	// TextArea
-	TextArea listadoEmpleados = new TextArea(4, 30);
+	TextArea listadoEmpleados = new TextArea(8, 40);
 	// Base de datos
 	BaseDatos bd = new BaseDatos();
 	String sentencia = "";
@@ -74,7 +74,7 @@ public class ConsultaEmpleado implements WindowListener
 			listadoEmpleados.setEditable(false);
 			ventana.add(listadoEmpleados);
 
-			ventana.setSize(300, 140);
+			ventana.setSize(400, 200);
 			ventana.setResizable(false);
 			ventana.setLocationRelativeTo(null);
 			ventana.addWindowListener(this);

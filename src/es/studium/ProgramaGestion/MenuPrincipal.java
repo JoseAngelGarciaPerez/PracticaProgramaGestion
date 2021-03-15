@@ -36,6 +36,12 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	MenuItem mniModificacionEmpleado = new MenuItem("Modificación");
 	MenuItem mniConsultaEmpleado = new MenuItem("Consulta");
 	
+	// Menu Contratos y sus items
+	Menu menuContratos = new Menu("Contratos");
+	MenuItem mniRegistrarContrato = new MenuItem("Registrar");
+	MenuItem mniCancelarContrato = new MenuItem("Cancelar");
+	MenuItem mniConsultaContratos = new MenuItem("Consulta");
+	
 	// Menu Opciones y sus items
 	Menu menuOpciones = new Menu("Opciones");
 	MenuItem mniInformacion = new MenuItem("Información");
@@ -43,7 +49,7 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	
 	// Tabla de todos los menuItems
 	MenuItem[] mnItems = {mniAltaCliente, mniAltaEmpleado, mniBajaCliente, mniBajaEmpleado, mniConsultaCliente, mniConsultaEmpleado,
-			mniModificacionCliente, mniModificacionEmpleado, mniInformacion, mniSalir};
+			mniModificacionCliente, mniModificacionEmpleado, mniRegistrarContrato, mniCancelarContrato, mniConsultaContratos, mniInformacion, mniSalir};
 	
 	// Ventana de informacion del programa
 	Dialog dlgInformacion = new Dialog(ventana, "Información", true);
@@ -69,11 +75,19 @@ public class MenuPrincipal implements WindowListener, ActionListener
 			menuEmpleados.add(mniModificacionEmpleado);
 			menuEmpleados.add(mniConsultaEmpleado);
 		}
+		menuContratos.add(mniRegistrarContrato);
+		if(tipo == 1) 
+		{
+			menuContratos.add(mniCancelarContrato);
+			menuContratos.add(mniConsultaContratos);
+		}
+		
 		menuOpciones.add(mniInformacion);
 		menuOpciones.add(mniSalir);
 		
 		menu.add(menuClientes);
 		menu.add(menuEmpleados);
+		menu.add(menuContratos);
 		menu.add(menuOpciones);
 		
 		ventana.setMenuBar(menu);
@@ -185,6 +199,19 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		else if(ae.getSource().equals(mniModificacionEmpleado)) 
 		{
 			new ModificarEmpleado();
+		}
+		// Contratos
+		else if(ae.getSource().equals(mniRegistrarContrato)) 
+		{
+			new RegistrarContrato();
+		}
+		else if(ae.getSource().equals(mniCancelarContrato)) 
+		{
+			new CancelarContrato();
+		}
+		else if(ae.getSource().equals(mniConsultaContratos)) 
+		{
+			new ConsultaContrato();
 		}
 		
 		// Opciones
