@@ -13,7 +13,7 @@ import java.sql.Statement;
 public class ConsultaEmpleado implements WindowListener
 {
 	/* Elementos */
-	
+
 	// Frame
 	Frame ventana = new Frame("Consulta Empleados");
 	// TextArea
@@ -24,6 +24,16 @@ public class ConsultaEmpleado implements WindowListener
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet rs = null;
+
+	// Base de datos 2 (para el FK de jefe)
+	String sentencia2 = "";
+	Connection connection2 = null;
+	Statement statement2 = null;
+	ResultSet rs2 = null;
+
+	// Subordinado de un jefe
+	String subordinado = "";
+	int idSubordinado;
 
 	public ConsultaEmpleado()
 	{
@@ -44,13 +54,17 @@ public class ConsultaEmpleado implements WindowListener
 			rs = statement.executeQuery(sentencia);
 			listadoEmpleados.selectAll();
 			listadoEmpleados.setText("");
-			listadoEmpleados.append("Nº\tNombre\tApellidos\tDNI\n");
+			listadoEmpleados.append("Nº\tNombre\tApellidos\tDNI\tSubordinado\n");
 			// Mientras encuentre empleados
 			while (rs.next())
 			{
+
 				// Introduce el empleado en el listado
 				listadoEmpleados.append(rs.getInt("idEmpleados") + "\t" + rs.getString("nombreEmpleados") + "\t"
-						+ rs.getString("apellidosEmpleado") + "\t" + rs.getString("dniEmpleado") + "\n");
+						+ rs.getString("apellidosEmpleado") + "\t" + rs.getString("dniEmpleado") + "\t");
+				idSubordinado = rs.getInt("idEmpleadoJefeFK");
+				encontrarSubordinado();
+				listadoEmpleados.append(subordinado + "\n");
 			}
 		} catch (SQLException sqle)
 		{
@@ -68,8 +82,6 @@ public class ConsultaEmpleado implements WindowListener
 		}
 
 	}
-
-
 
 	@Override
 	public void windowActivated(WindowEvent arg0)
@@ -117,6 +129,38 @@ public class ConsultaEmpleado implements WindowListener
 	public void windowOpened(WindowEvent arg0)
 	{
 		// TODO Auto-generated method stub
+
+	}
+
+	public void encontrarSubordinado()
+	{
+		connection2 = bd.conectar();
+		sentencia2 = "SELECT * FROM empleados WHERE idEmpleados = " + idSubordinado;
+
+		try
+		{
+			if (idSubordinado == 0)
+			{
+				subordinado = "Nadie";
+			} else
+			{
+				// Crear una sentencia
+				statement2 = connection2.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				// Crear un objeto ResultSet para guardar lo obtenido
+				// y ejecutar la sentencia SQL
+				rs2 = statement2.executeQuery(sentencia2);
+				
+				while(rs2.next()) {
+
+					subordinado = rs2.getString("nombreEmpleados") + " " + rs2.getString("apellidosEmpleado");
+					
+				}
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+
+		}
 
 	}
 
