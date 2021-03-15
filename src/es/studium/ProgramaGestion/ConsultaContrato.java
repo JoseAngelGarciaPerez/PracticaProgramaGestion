@@ -73,7 +73,7 @@ public class ConsultaContrato implements WindowListener
 				datosEmpleado();
 
 				// Introduce el contrato en el listado
-				listadoContratos.append(rs.getInt("idContrato") + "\t" + nombreCliente + "\t" + nombreEmpleado + "\t" + rs.getDate("fechaContrato"));
+				listadoContratos.append(rs.getInt("idContrato") + "\t" + nombreCliente + "\t" + nombreEmpleado + "\t" + rs.getDate("fechaContrato") + "\n");
 
 			}
 		} catch (SQLException sqle)
