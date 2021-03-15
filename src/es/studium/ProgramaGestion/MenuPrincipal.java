@@ -1,7 +1,9 @@
 package es.studium.ProgramaGestion;
 
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.Label;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -34,9 +36,20 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	MenuItem mniModificacionEmpleado = new MenuItem("Modificación");
 	MenuItem mniConsultaEmpleado = new MenuItem("Consulta");
 	
+	// Menu Opciones y sus items
+	Menu menuOpciones = new Menu("Opciones");
+	MenuItem mniInformacion = new MenuItem("Información");
+	MenuItem mniSalir = new MenuItem("Salir");
+	
 	// Tabla de todos los menuItems
 	MenuItem[] mnItems = {mniAltaCliente, mniAltaEmpleado, mniBajaCliente, mniBajaEmpleado, mniConsultaCliente, mniConsultaEmpleado,
-			mniModificacionCliente, mniModificacionEmpleado};
+			mniModificacionCliente, mniModificacionEmpleado, mniInformacion, mniSalir};
+	
+	// Ventana de informacion del programa
+	Dialog dlgInformacion = new Dialog(ventana, "Información", true);
+	Label lblInfo1 = new Label("Programa creado por:");
+	Label lblInfo2 = new Label("José Ángel García Pérez");
+	Label lblInfo3 = new Label("1ºDAM");
 	
 	public MenuPrincipal(int tipo) 
 	{
@@ -56,8 +69,12 @@ public class MenuPrincipal implements WindowListener, ActionListener
 			menuEmpleados.add(mniModificacionEmpleado);
 			menuEmpleados.add(mniConsultaEmpleado);
 		}
+		menuOpciones.add(mniInformacion);
+		menuOpciones.add(mniSalir);
+		
 		menu.add(menuClientes);
 		menu.add(menuEmpleados);
+		menu.add(menuOpciones);
 		
 		ventana.setMenuBar(menu);
 		
@@ -69,7 +86,7 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		}
 		
 		ventana.setResizable(false);
-		ventana.setSize(200,200);
+		ventana.setSize(250,200);
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
 	}
@@ -92,8 +109,15 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	@Override
 	public void windowClosing(WindowEvent arg0)
 	{	
-		ventana.setVisible(false);
-		new Login();
+		if(dlgInformacion.isActive()) 
+		{
+			dlgInformacion.setVisible(false);
+		}
+		else 
+		{
+			ventana.setVisible(false);
+			new Login();
+		}
 	}
 
 	@Override
@@ -161,6 +185,26 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		else if(ae.getSource().equals(mniModificacionEmpleado)) 
 		{
 			new ModificarEmpleado();
+		}
+		
+		// Opciones
+		else if(ae.getSource().equals(mniInformacion)) 
+		{
+			dlgInformacion.setLayout(new FlowLayout());
+			dlgInformacion.add(lblInfo1);
+			dlgInformacion.add(lblInfo2);
+			dlgInformacion.add(lblInfo3);
+			
+			dlgInformacion.addWindowListener(this);
+			dlgInformacion.setSize(100,125);
+			dlgInformacion.setResizable(false);
+			dlgInformacion.setLocationRelativeTo(null);
+			dlgInformacion.setVisible(true);
+		}
+		else if(ae.getSource().equals(mniSalir)) 
+		{
+			ventana.setVisible(false);
+			new Login();
 		}
 		
 	}
