@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 
 public class MenuPrincipal implements WindowListener, ActionListener
 {
@@ -236,7 +237,14 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		}
 		else if(ae.getSource().equals(mniAyuda)) 
 		{
-			
+			try 
+			{
+				Runtime.getRuntime().exec("hh.exe ayudaGestion.chm");
+			}catch(IOException e) 
+			{
+				e.printStackTrace();
+			}
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"][Observando los documentos de ayuda]");
 		}
 		else if(ae.getSource().equals(mniSalir)) 
 		{
