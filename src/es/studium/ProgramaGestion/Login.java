@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Login implements WindowListener, ActionListener, KeyListener
 {
@@ -118,6 +120,10 @@ public class Login implements WindowListener, ActionListener, KeyListener
 				int tipo = rs.getInt("tipoUsuario");
 				ventanaLogin.setVisible(false);
 				new MenuPrincipal(tipo);
+				
+				LogMovimientos.usuario=txtUsuario.getText();
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+txtUsuario.getText()+"][Acceso al sistema]");
 			}
 			else // Si no encuentra nada
 			{

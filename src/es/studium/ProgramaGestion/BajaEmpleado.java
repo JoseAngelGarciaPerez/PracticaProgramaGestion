@@ -124,6 +124,8 @@ public class BajaEmpleado implements WindowListener, ActionListener
 				sentencia = "DELETE FROM empleados WHERE idEmpleados = " + elegido[0];
 				statement.executeUpdate(sentencia);
 				lblConfirmacionBajaEmpleado.setText("Baja de Empleado Correcta");
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 			} catch (SQLException sqle)
 			{
 				lblConfirmacionBajaEmpleado.setText("Error en Baja");

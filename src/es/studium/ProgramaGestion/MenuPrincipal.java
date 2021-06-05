@@ -44,12 +44,13 @@ public class MenuPrincipal implements WindowListener, ActionListener
 	
 	// Menu Opciones y sus items
 	Menu menuOpciones = new Menu("Opciones");
+	MenuItem mniAyuda = new MenuItem("Ayuda");
 	MenuItem mniInformacion = new MenuItem("Información");
 	MenuItem mniSalir = new MenuItem("Salir");
 	
 	// Tabla de todos los menuItems
 	MenuItem[] mnItems = {mniAltaCliente, mniAltaEmpleado, mniBajaCliente, mniBajaEmpleado, mniConsultaCliente, mniConsultaEmpleado,
-			mniModificacionCliente, mniModificacionEmpleado, mniRegistrarContrato, mniCancelarContrato, mniConsultaContratos, mniInformacion, mniSalir};
+			mniModificacionCliente, mniModificacionEmpleado, mniRegistrarContrato, mniCancelarContrato, mniConsultaContratos, mniInformacion, mniAyuda, mniSalir};
 	
 	// Ventana de informacion del programa
 	Dialog dlgInformacion = new Dialog(ventana, "Información", true);
@@ -83,6 +84,7 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		}
 		
 		menuOpciones.add(mniInformacion);
+		menuOpciones.add(mniAyuda);
 		menuOpciones.add(mniSalir);
 		
 		menu.add(menuClientes);
@@ -130,7 +132,9 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		else 
 		{
 			ventana.setVisible(false);
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"][El usuario abandonó el sistema]");
 			new Login();
+			
 		}
 	}
 
@@ -217,6 +221,8 @@ public class MenuPrincipal implements WindowListener, ActionListener
 		// Opciones
 		else if(ae.getSource().equals(mniInformacion)) 
 		{
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"][Consultando información de la aplicación]");
+			
 			dlgInformacion.setLayout(new FlowLayout());
 			dlgInformacion.add(lblInfo1);
 			dlgInformacion.add(lblInfo2);
@@ -228,9 +234,14 @@ public class MenuPrincipal implements WindowListener, ActionListener
 			dlgInformacion.setLocationRelativeTo(null);
 			dlgInformacion.setVisible(true);
 		}
+		else if(ae.getSource().equals(mniAyuda)) 
+		{
+			
+		}
 		else if(ae.getSource().equals(mniSalir)) 
 		{
 			ventana.setVisible(false);
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"][El usuario abandonó el sistema]");
 			new Login();
 		}
 		

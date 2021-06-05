@@ -110,6 +110,8 @@ public class AltaCliente implements WindowListener, ActionListener
 							+ "', '" + txtDireccion.getText() + "')";
 					statement.executeUpdate(sentencia);
 					lblMensajeAltaCliente.setText("Alta de Cliente Correcta");
+					
+					new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 				} else
 				{
 					// Si uno o mas TextFields estan vacios

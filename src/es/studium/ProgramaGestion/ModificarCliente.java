@@ -146,7 +146,8 @@ public class ModificarCliente implements WindowListener, ActionListener
 		{
 			connection = bd.conectar();
 			sentencia = "SELECT * FROM clientes WHERE idCliente = " + idElegido;
-
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
+			
 			try
 			{
 				// Crear una sentencia
@@ -161,6 +162,8 @@ public class ModificarCliente implements WindowListener, ActionListener
 						+ txtDireccion.getText() + "' " + "WHERE (idCliente = '" + idElegido + "')";
 				statement.executeUpdate(sentencia);
 				lblConfirmacion.setText("Modificacion realizada");
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 			// Si hay una excepcion SQL
 			} catch (SQLException sqle)

@@ -154,6 +154,8 @@ public class AltaEmpleados implements WindowListener, ActionListener, ItemListen
 								+ txtTelefono.getText() + "', '" + txtDireccion.getText() + "', null)";
 						statement.executeUpdate(sentencia);
 						lblMensajeAltaEmpleado.setText("Alta de Empleado Correcta");
+						
+						new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 					} else
 					{
@@ -207,6 +209,8 @@ public class AltaEmpleados implements WindowListener, ActionListener, ItemListen
 									+ txtApellidos.getText() + "', " + "'" + txtDni.getText() + "', '"
 									+ txtTelefono.getText() + "', '" + txtDireccion.getText() + "', null)";
 							statement.executeUpdate(sentencia);
+							
+							new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 							// Sentencia que elige al último empleado creado (que es el que acabamos de crear)
 							sentencia = "SELECT * FROM empleados ORDER BY idEmpleados desc LIMIT 1";
@@ -223,6 +227,8 @@ public class AltaEmpleados implements WindowListener, ActionListener, ItemListen
 							statement.executeUpdate(sentencia);
 
 							lblMensajeAltaEmpleado.setText("Alta de Empleado Correcta");
+							
+							new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 						} else
 						{
@@ -277,6 +283,8 @@ public class AltaEmpleados implements WindowListener, ActionListener, ItemListen
 							statement.executeUpdate(sentencia);
 
 							lblMensajeAltaEmpleado.setText("Alta de Empleado Correcta");
+							
+							new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 						} else
 						{

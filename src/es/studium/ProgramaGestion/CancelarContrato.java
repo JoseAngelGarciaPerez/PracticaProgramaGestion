@@ -145,6 +145,8 @@ public class CancelarContrato implements WindowListener, ActionListener
 				sentencia = "DELETE FROM contratos WHERE idContrato = " + elegido[0];
 				statement.executeUpdate(sentencia);
 				lblConfirmacionCancelacion.setText("Contrato cancelado");
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 			} catch (SQLException sqle)
 			{
 				lblConfirmacionCancelacion.setText("Error en la cancelación");

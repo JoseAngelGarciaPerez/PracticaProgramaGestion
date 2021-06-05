@@ -120,6 +120,9 @@ public class BajaCliente implements WindowListener, ActionListener
 				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				statement.executeUpdate(sentencia);
 				lblConfirmacionBajaCliente.setText("Baja de Cliente Correcta");
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
+				
 			} catch (SQLException sqle)
 			{
 				lblConfirmacionBajaCliente.setText("Error en Baja");

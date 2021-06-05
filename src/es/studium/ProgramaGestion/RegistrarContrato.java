@@ -146,6 +146,8 @@ public class RegistrarContrato implements WindowListener, ActionListener
 				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				statement.executeUpdate(sentencia);
 				lblMensaje.setText("Registro completado");
+				
+				new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 			} catch (SQLException e)
 			{
 				e.printStackTrace();

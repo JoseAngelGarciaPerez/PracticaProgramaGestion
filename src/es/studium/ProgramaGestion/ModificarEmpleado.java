@@ -162,7 +162,7 @@ public class ModificarEmpleado implements WindowListener, ActionListener, ItemLi
 		{
 			connection = bd.conectar();
 			sentencia = "SELECT * FROM empleados WHERE idEmpleados = " + idElegido;
-
+			new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 			// Si el empleado es un empleado normal
 			if (checkNormal.getState() == true)
 			{
@@ -184,6 +184,8 @@ public class ModificarEmpleado implements WindowListener, ActionListener, ItemLi
 					statement.executeUpdate(sentencia);
 
 					lblConfirmacion.setText("Modificacion realizada");
+					
+					new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 					// Si hay una excepcion SQL
 				} catch (SQLException sqle)
@@ -224,6 +226,8 @@ public class ModificarEmpleado implements WindowListener, ActionListener, ItemLi
 						statement.executeUpdate(sentencia);
 						
 						lblConfirmacion.setText("Modificacion realizada");
+						
+						new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 						// Si hay una excepcion SQL
 					} catch (SQLException sqle)
@@ -265,6 +269,8 @@ public class ModificarEmpleado implements WindowListener, ActionListener, ItemLi
 						statement.executeUpdate(sentencia);
 						
 						lblConfirmacion.setText("Modificacion realizada");
+						
+						new LogMovimientos("["+LogFechaHora.fechaActual()+"]["+LogMovimientos.usuario+"]["+sentencia+"]");
 
 						// Si hay una excepcion SQL
 					} catch (SQLException sqle)
